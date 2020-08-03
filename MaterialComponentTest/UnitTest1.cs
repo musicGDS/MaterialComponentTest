@@ -7,17 +7,15 @@ namespace MaterialComponentTest
 {
     public class Tests
     {
+        public static int sleepTime = 1000;
+
         [SetUp]
         public void Setup()
         {
-            test1_Autocompleate();
+            
         }
 
-        [Test]
-        public void Test1()
-        {
-            Assert.Pass();
-        }
+        
 
         [Test]
         public static void test1_Autocompleate()
@@ -38,7 +36,7 @@ namespace MaterialComponentTest
 
             //Wait the page to load
 
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(sleepTime);
 
             // Write an half of input and press selection
 
@@ -77,7 +75,7 @@ namespace MaterialComponentTest
 
             //Wait the page to load
 
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(sleepTime);
 
             IWebElement button = driver.FindElement(By.XPath("//button[@class='mat-focus-indicator mat-badge mat-raised-button mat-button-base mat-badge-overlap mat-badge-above mat-badge-after mat-badge-medium']"));
 
@@ -113,7 +111,7 @@ namespace MaterialComponentTest
 
             //Wait the page to load
 
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(sleepTime);
 
             driver.FindElement(By.XPath("//button[@class='mat-focus-indicator mat-raised-button mat-button-base']")).Click();
 
@@ -131,6 +129,7 @@ namespace MaterialComponentTest
                     return false;
                 }
             }
+
 
             Assert.IsTrue(IsElementPresent());
 
@@ -150,7 +149,7 @@ namespace MaterialComponentTest
 
             driver.FindElement(By.XPath("//div[text() = 'Button']")).Click();
 
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(sleepTime);
 
             driver.FindElement(By.XPath("//a[@class='mat-focus-indicator mat-raised-button mat-button-base']")).Click();
 
@@ -182,7 +181,7 @@ namespace MaterialComponentTest
 
             driver.FindElement(By.XPath("//div[text() = 'Button toggle']")).Click();
 
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(sleepTime);
 
             IWebElement boldButton = driver.FindElement(By.XPath("//mat-button-toggle [@value = 'bold']"));
 
@@ -201,7 +200,7 @@ namespace MaterialComponentTest
 
             boldButton.Click();
 
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(sleepTime);
 
             pressedValue = boldButton.GetAttribute("aria-pressed");
 
@@ -223,13 +222,13 @@ namespace MaterialComponentTest
 
             driver.FindElement(By.XPath("//div[text() = 'Checkbox']")).Click();
 
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(sleepTime);
 
             IWebElement checkbox = driver.FindElement(By.XPath("//mat-checkbox[@id='mat-checkbox-1']//label[@class='mat-checkbox-layout']"));
 
             checkbox.Click();
 
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(sleepTime);
 
             driver.FindElement(By.XPath("//mat-checkbox[@class='mat-checkbox example-margin mat-accent mat-checkbox-checked']")).Click();
 
@@ -251,7 +250,7 @@ namespace MaterialComponentTest
 
             driver.FindElement(By.XPath("//div[text() = 'Chips']")).Click();
 
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(sleepTime);
 
             IWebElement inputField = driver.FindElement(By.XPath("//mat-chip-list//input[@placeholder='New fruit...']"));
 
@@ -289,7 +288,7 @@ namespace MaterialComponentTest
 
             driver.FindElement(By.XPath("//div[text() = 'Datepicker']")).Click();
 
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(sleepTime);
 
             driver.FindElement(By.XPath("//html//body//material-docs-app//app-component-sidenav//mat-sidenav-container//mat-sidenav-content//div//div//main//app-component-viewer//div//div//component-overview//doc-viewer//div//div//example-viewer//div//div//datepicker-overview-example//mat-form-field//div//div//div//mat-datepicker-toggle//button")).Click();
 
@@ -318,7 +317,7 @@ namespace MaterialComponentTest
 
             driver.FindElement(By.XPath("//div[text() = 'Dialog']")).Click();
 
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(sleepTime);
 
             driver.FindElement(By.XPath("//button[@class='mat-focus-indicator mat-raised-button mat-button-base']")).Click();
 
@@ -330,7 +329,7 @@ namespace MaterialComponentTest
 
             driver.FindElement(By.XPath("//button[2]")).Click();
 
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(sleepTime);
 
             driver.FindElement(By.XPath("//i[contains(text(),'pig')]"));
 
@@ -351,7 +350,7 @@ namespace MaterialComponentTest
 
             driver.FindElement(By.XPath("//div[text() = 'Expansion Panel']")).Click();
 
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(sleepTime);
 
             driver.FindElement(By.XPath("//mat-expansion-panel[1]//mat-expansion-panel-header[1]")).Click();
 
@@ -368,7 +367,7 @@ namespace MaterialComponentTest
 
         //    driver.FindElement(By.XPath("//div[text() = 'Form Field']")).Click();
 
-        //    System.Threading.Thread.Sleep(5000);
+        //    System.Threading.Thread.Sleep(sleepTime);
         //}
 
         [Test]
@@ -383,7 +382,7 @@ namespace MaterialComponentTest
 
             driver.FindElement(By.XPath("//div[text() = 'Paginator']")).Click();
 
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(sleepTime);
 
             driver.FindElement(By.XPath("//html//body//material-docs-app//app-component-sidenav//mat-sidenav-container//mat-sidenav-content//div//div//main//app-component-viewer//div//div//component-overview//doc-viewer//div//div//example-viewer//div//div//paginator-overview-example//mat-paginator//div//div//div//mat-form-field//div//div//div//mat-select//div//div//span//span")).Click();
 
