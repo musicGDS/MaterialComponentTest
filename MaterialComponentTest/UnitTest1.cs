@@ -4,6 +4,8 @@ using OpenQA.Selenium.Chrome;
 using NUnit.Framework;
 using OpenQA.Selenium.Interactions;
 
+
+// Google "driver.Manage().Timeouts().ImplicitWait(1, TimeUnit.SECONDS);"
 namespace MaterialComponentTest
 {
     public class Tests
@@ -13,7 +15,9 @@ namespace MaterialComponentTest
         [SetUp]
         public void Setup()
         {
-            
+            IWebDriver driver = new ChromeDriver();
+
+            driver.Navigate().GoToUrl("https://material.angular.io/components/categories");
         }
 
 
@@ -25,6 +29,7 @@ namespace MaterialComponentTest
             // Create a driver instance for chromedriver
             IWebDriver driver = new ChromeDriver();
 
+            
             //Navigate to material design page
             driver.Navigate().GoToUrl("https://material.angular.io/components/categories");
 
@@ -90,8 +95,6 @@ namespace MaterialComponentTest
 
             Assert.That(classes, Does.Contain(badgeCss), "Test 2 OK");
 
-            Console.ReadLine();
-
             driver.Close();
         }
 
@@ -116,8 +119,6 @@ namespace MaterialComponentTest
 
             driver.FindElement(By.XPath("//button[@class='mat-focus-indicator mat-raised-button mat-button-base']")).Click();
 
-
-
             bool IsElementPresent()
             {
                 try
@@ -133,12 +134,11 @@ namespace MaterialComponentTest
 
             Assert.IsTrue(IsElementPresent());
 
-            //Console.ReadLine();
-
             driver.Close();
         }
 
         [Test]
+
         public static void test4_Button()
         {
             string expTitle = "Google";
@@ -183,33 +183,19 @@ namespace MaterialComponentTest
 
             System.Threading.Thread.Sleep(sleepTime);
 
-            IWebElement boldButton = driver.FindElement(By.XPath("//mat-button-toggle [@value = 'bold']"));
+            IWebElement boldButton = driver.FindElement(By.XPath("//button-toggle-overview-example//mat-button-toggle[1]//button[1]"));
 
-
-            //Testing bold button
-
-            //Get arria-pressed
-
-            string pressedValue = boldButton.GetAttribute("aria-pressed");
-
-            Console.WriteLine("pressedValue: " + pressedValue);
-
-            Console.ReadLine();
-
-            //Assert.That('false', 'true');
+            string pressedValue1 = boldButton.GetAttribute("aria-pressed");
 
             boldButton.Click();
 
             System.Threading.Thread.Sleep(sleepTime);
 
-            pressedValue = boldButton.GetAttribute("aria-pressed");
+            string pressedValue2 = boldButton.GetAttribute("aria-pressed");
 
-            Console.WriteLine("pressedValue: " + pressedValue);
-
-            Console.ReadLine();
+            Assert.That(pressedValue1 != pressedValue2);
 
             driver.Close();
-
         }
 
         [Test]
@@ -267,9 +253,6 @@ namespace MaterialComponentTest
             driver.Close();
 
             Assert.True(chipsCountBefore < chipsCountAfter);
-
-            //POSSIBLE TO DO MORE TESTS. F.ex check if chip is deleted
-
         }
 
         [Test]
@@ -277,8 +260,6 @@ namespace MaterialComponentTest
         public static void test8_Datepicker()
         {
             string expectedResult = "1/4/2020";
-
-
 
             IWebDriver driver = new ChromeDriver();
 
@@ -354,6 +335,8 @@ namespace MaterialComponentTest
 
             bool panelPresent = driver.FindElements(By.XPath("//div[@class='docs-example-viewer-body ng-star-inserted']")).Count != 0;
 
+            driver.Close();
+
             Assert.IsTrue(panelPresent);
         }
 
@@ -380,8 +363,6 @@ namespace MaterialComponentTest
             driver.Close();
 
             Assert.That(testString == actualString);
-
-
         }
 
         [Test]
@@ -404,11 +385,9 @@ namespace MaterialComponentTest
 
             string actualValue = driver.FindElement(By.XPath("//div[@class='mat-paginator-range-label']")).Text;
 
-
             driver.Close();
 
             Assert.AreEqual(expectedValue, actualValue);
-
         }
 
         [Test]
@@ -540,9 +519,7 @@ namespace MaterialComponentTest
 
             bool snackBarNotPresent2 = driver.FindElements(By.XPath("//div[@class='cdk-overlay-container']")).Count == 0;
 
-            Console.WriteLine(snackBarNotPresent);
-
-            Console.WriteLine(snackBarNotPresent2);
+            driver.Close();
 
             Console.ReadLine();
         }
@@ -568,6 +545,8 @@ namespace MaterialComponentTest
             System.Threading.Thread.Sleep(sleepTime);
 
             string afterText = driver.FindElement(By.XPath("//sort-overview-example//tr[2]//td[1]")).Text;
+
+            driver.Close();
 
             Assert.That(startText != afterText);
         }
@@ -607,7 +586,7 @@ namespace MaterialComponentTest
 
             //Back
 
-            driver.FindElement(By.XPath("//body/material-docs-app/app-component-sidenav/mat-sidenav-container/mat-sidenav-content/div/div/main/app-component-viewer/div/div/component-overview/doc-viewer/div/div/example-viewer/div/div/stepper-overview-example/mat-horizontal-stepper/div/div/div/button[1]")).Click();
+            driver.FindElement(By.XPath("//stepper-overview-example[@class='ng-star-inserted']//div[@class='ng-star-inserted']//button[1]")).Click();
 
             Assert.That(address == addressInput.GetAttribute("value"));
 
@@ -615,7 +594,13 @@ namespace MaterialComponentTest
 
             driver.FindElement(By.XPath("//stepper-overview-example//div//div[2]//form[1]//div[1]//button[1]")).Click();
 
+            
+
+            //string nameResult = driver.FindElement(By.XPath("//stepper-overview-example//div[1]//form[1]//mat-form-field[1]//div[1]//div[1]//div[1]//input[1]")).GetAttribute("value");
+
             Assert.That(name == nameInput.GetAttribute("value"));
+
+            driver.Close();
         }
 
         [Test]
@@ -640,30 +625,31 @@ namespace MaterialComponentTest
             driver.Close();
 
             Assert.That(result1 != result2);
-
         }
 
         [Test]
 
         public static void test21_Tree()
         {
+            string expected = "Apple";
+
             IWebDriver driver = new ChromeDriver();
 
             driver.Navigate().GoToUrl("https://material.angular.io/components/categories");
 
             driver.FindElement(By.XPath("//div[text() = 'Tree']")).Click();
 
-            System.Threading.Thread.Sleep(sleepTime);
+            System.Threading.Thread.Sleep(1000);
 
             driver.FindElement(By.XPath("//mat-tree-node[1]//button[1]//span[1]//mat-icon[1]")).Click();
 
-            int subCount = driver.FindElements(By.XPath("//tree-flat-overview-example//mat-tree-node[1]//button")).Count;
+            string applePresent = driver.FindElement(By.XPath("//mat-tree-node[contains(text(),'Apple')]")).Text;
 
-            Console.WriteLine(subCount);
+            driver.Close();
 
-            Console.ReadLine();
-
+            Assert.That(expected == applePresent);
         }
+
 
         [Test]
 
@@ -685,9 +671,9 @@ namespace MaterialComponentTest
 
             string actualString = inputField.GetAttribute("value");
 
+            driver.Close();
 
             Assert.That(testString == actualString);
-
         }
 
     }
