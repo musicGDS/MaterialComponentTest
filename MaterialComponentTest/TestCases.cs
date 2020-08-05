@@ -27,13 +27,17 @@ namespace MaterialComponentTest
         [Test]
         public void test1_Autocompleate()
         {
-            IWebDriver driver = new ChromeDriver();
-
             string expResult = "Two";
 
             string input = "Tw";
 
+
+
+            IWebDriver driver = new ChromeDriver();
+
             ComponentsPage page = new ComponentsPage(driver);
+
+            page.goToPage();
 
             page.GoToAutocompleate();
 
@@ -88,9 +92,7 @@ namespace MaterialComponentTest
 
             ComponentsPage page = new ComponentsPage(driver);
 
-            page.GoToButton();
-
-            Button button = new Button(driver);
+            Button button = page.GoToButton(); 
 
             button.ClickButton();
 

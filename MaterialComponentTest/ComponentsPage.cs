@@ -30,7 +30,7 @@ namespace MaterialComponentTest
             PageFactory.InitElements(driver, this);
         }
 
-        [FindsBy(How = How.Name, Using = "Autocompleate")]
+        [FindsBy(How = How.XPath, Using = "//div[text() = 'Autocomplete']")]
         private IWebElement elem_autocompleate;
 
         [FindsBy(How = How.Name, Using = "Badge")]
@@ -130,7 +130,7 @@ namespace MaterialComponentTest
 
         public Button GoToButton()
         {
-            elem_bottomSheet.Click();
+            elem_button.Click();
             return new Button(driver);
         }
 

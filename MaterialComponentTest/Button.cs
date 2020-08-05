@@ -14,7 +14,7 @@ using SeleniumExtras.PageObjects;
 
 namespace MaterialComponentTest
 {
-    internal class Button
+    public class Button
     {
         
         private IWebDriver driver;
