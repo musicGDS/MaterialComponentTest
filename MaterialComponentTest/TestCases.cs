@@ -107,7 +107,21 @@ namespace MaterialComponentTest
         [Test]
         public void test5_ButtonToggle()
         {
+            IWebDriver driver = new ChromeDriver();
 
+            ComponentsPage page = new ComponentsPage(driver);
+
+            page.GoToButtonToggle();
+
+            ButtonToggle buttonToggle = new ButtonToggle(driver);
+
+            string before = buttonToggle.GetAriaPressed();
+
+            buttonToggle.PressButton();
+
+            string after = buttonToggle.GetAriaPressed();
+
+            Assert.That(before != after);
         }
     }
 }

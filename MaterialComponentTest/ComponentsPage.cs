@@ -133,5 +133,11 @@ namespace MaterialComponentTest
             elem_bottomSheet.Click();
             return new Button(driver);
         }
+
+        public ButtonToggle GoToButtonToggle()
+        {
+            elem_buttonToggle.Click();
+            return new ButtonToggle(driver);
+        }
     }
 }
