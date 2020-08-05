@@ -108,5 +108,30 @@ namespace MaterialComponentTest
             driver.Navigate().GoToUrl(componentsUrl);
         }
 
+        // Methods
+
+        public Autocompleate GoToAutocompleate()
+        {
+            elem_autocompleate.Click();
+            return new Autocompleate(driver);
+        }
+
+        public Badge GoToBadge()
+        {
+            elem_badge.Click();
+            return new Badge(driver);
+        }
+
+        public BottomSheet GoToBottomSheet()
+        {
+            elem_bottomSheet.Click();
+            return new BottomSheet(driver);
+        }
+
+        public Button GoToButton()
+        {
+            elem_bottomSheet.Click();
+            return new Button(driver);
+        }
     }
 }
