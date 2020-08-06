@@ -1,12 +1,5 @@
-﻿using System;
+﻿using MaterialComponentTest.Infrastructure;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
-using NUnit.Framework;
-using System.Threading;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium.Support.UI;
 // For supporting Page Object Model
 // Obsolete - using OpenQA.Selenium.Support.PageObjects;
@@ -15,19 +8,14 @@ using SeleniumExtras.PageObjects;
 
 namespace MaterialComponentTest
 {
-    public class ComponentsPage
+    public class ComponentsPage : PageBase
     {
         string componentsUrl = "https://material.angular.io/components/categories";
 
-
-        private IWebDriver driver;
         private WebDriverWait wait;
 
-        public ComponentsPage(IWebDriver driver)
+        public ComponentsPage(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            PageFactory.InitElements(driver, this);
         }
 
         [FindsBy(How = How.XPath, Using = "//div[text() = 'Autocomplete']")]
@@ -42,8 +30,7 @@ namespace MaterialComponentTest
         [FindsBy(How = How.Name, Using = "Button")]
         private IWebElement elem_button;
 
-        [FindsBy(How = How.Name, Using = "Button Toggle")]
-        private IWebElement elem_buttonToggle;
+        public By Elem_buttonToggle = By.XPath("(//a[@href='/components/button-toggle'])[1]");
 
         [FindsBy(How = How.Name, Using = "Checkbox")]
         private IWebElement elem_checkbox;
@@ -105,7 +92,7 @@ namespace MaterialComponentTest
         // Go to the designated page
         public void goToPage()
         {
-            driver.Navigate().GoToUrl(componentsUrl);
+            Driver.Navigate().GoToUrl(componentsUrl);
         }
 
         // Methods
@@ -113,31 +100,30 @@ namespace MaterialComponentTest
         public Autocompleate GoToAutocompleate()
         {
             elem_autocompleate.Click();
-            return new Autocompleate(driver);
+            return new Autocompleate(Driver);
         }
 
         public Badge GoToBadge()
         {
             elem_badge.Click();
-            return new Badge(driver);
+            return new Badge(Driver);
         }
 
         public BottomSheet GoToBottomSheet()
         {
             elem_bottomSheet.Click();
-            return new BottomSheet(driver);
+            return new BottomSheet(Driver);
         }
 
         public Button GoToButton()
         {
             elem_button.Click();
-            return new Button(driver);
+            return new Button(Driver);
         }
 
-        public ButtonToggle GoToButtonToggle()
+        public void GoToButtonToggle()
         {
-            elem_buttonToggle.Click();
-            return new ButtonToggle(driver);
+            Click(Elem_buttonToggle);
         }
     }
 }

@@ -1,29 +1,23 @@
-﻿using System;
+﻿using MaterialComponentTest.Infrastructure;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
 using NUnit.Framework;
-using System.Threading;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium.Support.UI;
 // For supporting Page Object Model
 // Obsolete - using OpenQA.Selenium.Support.PageObjects;
-using SeleniumExtras.PageObjects;
 using OpenQA.Selenium.Chrome;
 
 
 namespace MaterialComponentTest
 {
-    public class TestCases
+    public class TestCases : TestBase
     {
+        private ButtonTogglePage _buttonTogglePage;
+        private ComponentsPage _componentsPage;
         public TestCases()
         {
+            _buttonTogglePage = new ButtonTogglePage(Driver);
+            _componentsPage = new ComponentsPage(Driver);
         }
         
-
-
         [Test]
         public void test1_Autocompleate()
         {
@@ -117,21 +111,24 @@ namespace MaterialComponentTest
         [Test]
         public void test5_ButtonToggle()
         {
-            IWebDriver driver = new ChromeDriver();
+            _componentsPage.goToPage();
+            _componentsPage.GoToButtonToggle();
+            var before = _buttonTogglePage.GetAriaPressed();
 
-            ComponentsPage page = new ComponentsPage(driver);
+            _buttonTogglePage.PressButton();
 
-            page.GoToButtonToggle();
+            var after = _buttonTogglePage.GetAriaPressed();
 
-            ButtonToggle buttonToggle = new ButtonToggle(driver);
+            Assert.That(before, Is.Not.EqualTo(after));
 
-            string before = buttonToggle.GetAriaPressed();
-
-            buttonToggle.PressButton();
-
-            string after = buttonToggle.GetAriaPressed();
-
-            Assert.That(before != after);
+            Driver.Quit();
+            //reikia pasirūpinti browserio užclose'inimu po testo, tai neturi būt čia daroma, pagalvok, kur galima tai padaryti
+            //bendros pastabos:
+            //maniau buttontoggle bus pabaigtas iki galo ir padarys darbą, bet neatpažino man elementų, tai pakeičaiu
+            //bendrai kalbant visi testai turi būti išskirti į skirtingas klases, čia aš refactorinau užsimerkęs į kitus testus
+            //Kuo mažiau pasikartojančio kodo, pastebėk kaip driver'į galima patalpint, kad visur jo nekartot (suprantu, kad to nemokėjai, bet pritaikyt e-shop'e)
+            //jei bus klausimų, tai klausk :)
         }
+
     }
 }
