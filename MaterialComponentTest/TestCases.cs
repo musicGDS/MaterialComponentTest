@@ -39,13 +39,21 @@ namespace MaterialComponentTest
 
             page.goToPage();
 
-            page.GoToAutocompleate();
+            System.Threading.Thread.Sleep(1000);
 
-            Autocompleate autocompleate = new Autocompleate(driver);
+            
+
+            Autocompleate autocompleate = page.GoToAutocompleate();
+
+            System.Threading.Thread.Sleep(1000);
 
             autocompleate.EnterText(input);
 
+            System.Threading.Thread.Sleep(1000);
+
             autocompleate.ClickSuggestion();
+
+            System.Threading.Thread.Sleep(1000);
 
             Assert.That(expResult == autocompleate.GetResult());
         }

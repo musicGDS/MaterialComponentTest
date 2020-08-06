@@ -22,11 +22,11 @@ namespace MaterialComponentTest
         public Autocompleate(IWebDriver driver)
         {
             this.driver = driver;
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(1));
             PageFactory.InitElements(driver, this);
         }
 
-        [FindsBy(How = How.Id, Using = "mat-input-0")]
+        [FindsBy(How = How.XPath, Using = "//html//body//material-docs-app//app-component-sidenav//mat-sidenav-container//mat-sidenav-content//div//div//main//app-component-viewer//div//div//component-overview//doc-viewer//div//div//example-viewer//div//div//autocomplete-filter-example//form//mat-form-field//div//div//div//input")]
         private IWebElement elem_field;
 
         [FindsBy(How = How.XPath, Using = "//span[@class='mat-option-text']")]
@@ -34,16 +34,19 @@ namespace MaterialComponentTest
 
         public void EnterText(string text)
         {
-            elem_field.SendKeys(text);
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(1));
+            elem_field.SendKeys(text); 
         }
 
         public void ClickSuggestion()
         {
-            elem_suggestion.Click();
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(1));
+            elem_suggestion.Click(); 
         }
 
         public string GetResult()
         {
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(1));
             return elem_field.GetAttribute("value");
         }
     }
